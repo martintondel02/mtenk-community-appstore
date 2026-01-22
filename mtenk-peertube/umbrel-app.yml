@@ -2,7 +2,7 @@ manifestVersion: 1
 id: mtenk-peertube
 name: PeerTube
 tagline: A free, decentralized and federated video platform
-icon: https://upload.wikimedia.org/wikipedia/commons/6/6b/PeerTube_logo.svg
+icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR4-Rtz2wq7Fx4JdWSVaP4_jxAwPFxCoaM3Q&s
 category: Media
 version: "8.0.1"
 port: 9999
