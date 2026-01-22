@@ -7,8 +7,7 @@ services:
       APP_PORT: 9000
 
   peertube:
-    container_name: mtenk-peertube_peertube_1
-    image: chocobozzz/peertube:production-bookworm
+    image: chocobozzz/peertube:production
     env_file:
       - .env
     volumes:
@@ -21,7 +20,6 @@ services:
     restart: on-failure
 
   db:
-    container_name: mtenk-peertube_db_1
     image: postgres:13-alpine
     env_file:
       - .env
@@ -30,6 +28,5 @@ services:
     restart: on-failure
 
   redis:
-    container_name: mtenk-peertube_redis_1
     image: redis:6-alpine
     restart: on-failure
