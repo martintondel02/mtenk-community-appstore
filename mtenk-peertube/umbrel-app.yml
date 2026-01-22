@@ -22,4 +22,4 @@ releaseNotes: >-
 dependencies: []
 path: ""
 defaultUsername: "root"
-defaultPassword: "root"
+defaultPassword: "peertube"

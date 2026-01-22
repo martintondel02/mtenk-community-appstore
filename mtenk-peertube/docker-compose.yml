@@ -21,7 +21,7 @@ services:
       - PEERTUBE_WEBSERVER_HTTPS=false
       - PEERTUBE_ADMIN_EMAIL=admin@umbrel.local
       - PEERTUBE_SECRET=6e3b5e4c5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c
-      - PT_INITIAL_ROOT_PASSWORD=root
+      - PT_INITIAL_ROOT_PASSWORD=peertube
     volumes:
       - ./data/peertube/assets:/app/client/dist/static
       - ./data/peertube/data:/data
