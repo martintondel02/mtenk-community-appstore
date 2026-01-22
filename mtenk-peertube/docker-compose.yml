@@ -12,8 +12,6 @@ services:
     image: chocobozzz/peertube:production-bookworm
     env_file:
       - .env
-    ports:
-      - "9999:9000"
     volumes:
       - ./data/peertube/assets:/app/client/dist/static
       - ./data/peertube/data:/data
