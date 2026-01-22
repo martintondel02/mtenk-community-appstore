@@ -8,9 +8,6 @@ version: "8.0.1"
 port: 9999
 description: >-
   PeerTube is a free, decentralized and federated video platform developed by Framasoft, as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
-
-
-  **Note:** The default username is 'root'. The password is automatically generated during installation. Please check the app logs to retrieve it.
 developer: Chocobozzz
 website: https://joinpeertube.org
 submitter: mtenk
@@ -25,4 +22,4 @@ releaseNotes: >-
 dependencies: []
 path: ""
 defaultUsername: "root"
-defaultPassword: ""
+defaultPassword: "root"
