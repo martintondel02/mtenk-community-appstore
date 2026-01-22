@@ -3,12 +3,11 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: mtenk-peertube_server_1
+      APP_HOST: mtenk-peertube_peertube_1
       APP_PORT: 9000
 
-  server:
-    command: /usr/local/bin/node dist/server
-    container_name: mtenk-peertube_server_1
+  peertube:
+    container_name: mtenk-peertube_peertube_1
     image: chocobozzz/peertube:production-bookworm
     env_file:
       - .env
