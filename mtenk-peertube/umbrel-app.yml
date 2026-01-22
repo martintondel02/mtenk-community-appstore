@@ -1,0 +1,25 @@
+manifestVersion: 1
+id: mtenk-peertube
+name: PeerTube
+tagline: A free, decentralized and federated video platform
+icon: https://upload.wikimedia.org/wikipedia/commons/6/6b/PeerTube_logo.svg
+category: Media
+version: "8.0.1"
+port: 9999
+description: >-
+  PeerTube is a free, decentralized and federated video platform developed by Framasoft, as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
+developer: Chocobozzz
+website: https://joinpeertube.org
+submitter: mtenk
+submission: https://github.com/martintondel02/mtenk-community-appstore
+repo: https://github.com/Chocobozzz/PeerTube
+support: https://github.com/Chocobozzz/PeerTube/issues
+gallery:
+  - https://joinpeertube.org/img/features/interface-home.jpg
+  - https://joinpeertube.org/img/features/interface-discover.jpg
+releaseNotes: >-
+  Update to PeerTube v8.0.1
+dependencies: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: "admin"

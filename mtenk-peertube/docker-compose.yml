@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mtenk-peertube_server_1
+      APP_PORT: 9000
+
+  server:
+    command: /usr/local/bin/node dist/server
+    container_name: mtenk-peertube_server_1
+    image: chocobozzz/peertube:production-bookworm
+    env_file:
+      - .env
+    ports:
+      - "9999:9000"
+    volumes:
+      - ./data/peertube/assets:/app/client/dist/static
+      - ./data/peertube/data:/data
+      - ./data/peertube/config:/config
+    depends_on:
+      - db
+      - redis
+    restart: on-failure
+
+  db:
+    container_name: mtenk-peertube_db_1
+    image: postgres:13-alpine
+    env_file:
+      - .env
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    restart: on-failure
+
+  redis:
+    container_name: mtenk-peertube_redis_1
+    image: redis:6-alpine
+    restart: on-failure
