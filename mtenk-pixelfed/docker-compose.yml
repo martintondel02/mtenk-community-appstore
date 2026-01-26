@@ -6,82 +6,80 @@ services:
       APP_HOST: mtenk-pixelfed_web_1
       APP_PORT: 80
     ports:
-      - "8088:80"
-
-  fix_perms:
-    image: alpine:latest
-    command: sh -c "chown -R 82:82 /var/www/storage /var/www/bootstrap/cache"
-    volumes:
-      - ./data/storage:/var/www/storage
-      - ./data/bootstrap:/var/www/bootstrap/cache
+      - "8080:80"
 
   web:
-    image: pixelfed/pixelfed:v0.12.6
-    restart: on-failure
+    image: pixelfed/pixelfed:latest
+    restart: unless-stopped
     environment:
       - APP_NAME=Pixelfed
       - APP_ENV=production
-      - APP_KEY=base64:SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
-      - APP_DEBUG=true
-      - APP_URL=http://192.168.1.45:8088
-      - APP_DOMAIN=192.168.1.45
-      - DB_CONNECTION=pgsql
+      - APP_KEY=base64:somerandomkeygeneratedforumbrel1234567890=
+      - APP_DEBUG=false
+      - APP_URL=http://umbrel.local:8080
+      - APP_DOMAIN=umbrel.local
+      - ADMIN_DOMAIN=umbrel.local
+      - DB_CONNECTION=mysql
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=3306
       - DB_DATABASE=pixelfed
       - DB_USERNAME=pixelfed
       - DB_PASSWORD=pixelfed
+      - REDIS_CLIENT=predis
       - REDIS_HOST=redis
       - REDIS_PASSWORD=null
       - REDIS_PORT=6379
+      - TZ=UTC
     volumes:
-      - ./data/storage:/var/www/storage
-      - ./data/bootstrap:/var/www/bootstrap/cache
+      - ./data/pixelfed:/var/www/storage
+      - ./data/pixelfed/public:/var/www/public/storage
     depends_on:
       - db
       - redis
-      - fix_perms
 
   worker:
-    image: pixelfed/pixelfed:v0.12.6
-    restart: on-failure
+    image: pixelfed/pixelfed:latest
     command: php artisan horizon
+    restart: unless-stopped
     environment:
       - APP_NAME=Pixelfed
       - APP_ENV=production
-      - APP_KEY=base64:SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
-      - APP_DEBUG=true
-      - APP_URL=http://192.168.1.45:8088
-      - APP_DOMAIN=192.168.1.45
-      - DB_CONNECTION=pgsql
+      - APP_KEY=base64:somerandomkeygeneratedforumbrel1234567890=
+      - APP_DEBUG=false
+      - APP_URL=http://umbrel.local:8080
+      - APP_DOMAIN=umbrel.local
+      - ADMIN_DOMAIN=umbrel.local
+      - DB_CONNECTION=mysql
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=3306
       - DB_DATABASE=pixelfed
       - DB_USERNAME=pixelfed
       - DB_PASSWORD=pixelfed
+      - REDIS_CLIENT=predis
       - REDIS_HOST=redis
       - REDIS_PASSWORD=null
       - REDIS_PORT=6379
+      - TZ=UTC
     volumes:
-      - ./data/storage:/var/www/storage
-      - ./data/bootstrap:/var/www/bootstrap/cache
+      - ./data/pixelfed:/var/www/storage
+      - ./data/pixelfed/public:/var/www/public/storage
     depends_on:
       - db
       - redis
-      - fix_perms
 
   db:
-    image: postgres:13-alpine
-    restart: on-failure
+    image: mariadb:10.6
+    restart: unless-stopped
     environment:
-      - POSTGRES_DB=pixelfed
-      - POSTGRES_USER=pixelfed
-      - POSTGRES_PASSWORD=pixelfed
+      - MYSQL_DATABASE=pixelfed
+      - MYSQL_USER=pixelfed
+      - MYSQL_PASSWORD=pixelfed
+      - MYSQL_ROOT_PASSWORD=pixelfed
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/db:/var/lib/mysql
 
   redis:
     image: redis:6-alpine
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ./data/redis:/data

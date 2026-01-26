@@ -1,13 +1,13 @@
 manifestVersion: 1
 id: mtenk-pixelfed
 name: Pixelfed
-tagline: Photo sharing. For everyone.
-icon: https://raw.githubusercontent.com/pixelfed/pixelfed/dev/public/img/pixelfed-icon-color.png
+tagline: A free and ethical photo sharing platform.
+icon: https://pixelfed.org/storage/img/pixelfed-icon.png
 category: Social
-version: "0.12.6"
-port: 8088
+version: "0.11.13"
+port: 8080
 description: >-
-  Pixelfed is a free and ethical photo sharing platform, powered by ActivityPub federation.
+  Pixelfed is a free and ethical photo sharing platform, powered by ActivityPub.
 developer: Pixelfed
 website: https://pixelfed.org
 submitter: mtenk
@@ -15,11 +15,10 @@ submission: https://github.com/martintondel02/mtenk-community-appstore
 repo: https://github.com/pixelfed/pixelfed
 support: https://github.com/pixelfed/pixelfed/issues
 gallery:
-  - https://pixelfed.org/storage/img/2.9/features-discover.png
-  - https://pixelfed.org/storage/img/2.9/features-profile.png
+  - https://pixelfed.org/storage/img/pixelfed-landing-1.png
 releaseNotes: >-
-  Update to Pixelfed v0.12.6
+  Initial release for Umbrel.
 dependencies: []
 path: ""
 defaultUsername: "admin"
-defaultPassword: "pixelfed_password_change_me"
+defaultPassword: "password"
