@@ -8,14 +8,21 @@ services:
     ports:
       - "8088:80"
 
+  fix_perms:
+    image: alpine:latest
+    command: sh -c "chown -R 82:82 /var/www/storage /var/www/bootstrap/cache"
+    volumes:
+      - ./data/storage:/var/www/storage
+      - ./data/bootstrap:/var/www/bootstrap/cache
+
   web:
     image: pixelfed/pixelfed:v0.12.6
     restart: on-failure
     environment:
       - APP_NAME=Pixelfed
       - APP_ENV=production
-      - APP_KEY=SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
-      - APP_DEBUG=false
+      - APP_KEY=base64:SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
+      - APP_DEBUG=true
       - APP_URL=http://192.168.1.45:8088
       - APP_DOMAIN=192.168.1.45
       - DB_CONNECTION=pgsql
@@ -33,6 +40,7 @@ services:
     depends_on:
       - db
       - redis
+      - fix_perms
 
   worker:
     image: pixelfed/pixelfed:v0.12.6
@@ -41,8 +49,8 @@ services:
     environment:
       - APP_NAME=Pixelfed
       - APP_ENV=production
-      - APP_KEY=SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
-      - APP_DEBUG=false
+      - APP_KEY=base64:SLsIwivZxWcGTDZcLVUFuDDRI2Sw/lEAXlwPDaESwE0=
+      - APP_DEBUG=true
       - APP_URL=http://192.168.1.45:8088
       - APP_DOMAIN=192.168.1.45
       - DB_CONNECTION=pgsql
@@ -60,6 +68,7 @@ services:
     depends_on:
       - db
       - redis
+      - fix_perms
 
   db:
     image: postgres:13-alpine
