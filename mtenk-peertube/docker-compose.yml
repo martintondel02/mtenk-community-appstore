@@ -5,6 +5,8 @@ services:
     environment:
       APP_HOST: mtenk-peertube_peertube_1
       APP_PORT: 9000
+    ports:
+      - "9999:80"
 
   peertube:
     image: chocobozzz/peertube:production
