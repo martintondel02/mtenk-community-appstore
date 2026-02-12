@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  web:
+    image: mediacms/mediacms:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - ${APP_DATA_DIR}/data/media_files:/home/mediacms.io/mediacms/media_files
+      - ${APP_DATA_DIR}/data/logs:/home/mediacms.io/mediacms/logs
+    environment:
+      DB_HOST: db
+      DB_NAME: mediacms
+      DB_USER: mediacms
+      DB_PASSWORD: "change_me_please"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ADMIN_USER: "admin"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "change_me_please"
+      ENABLE_CELERY_SHORT: 'no'
+      ENABLE_CELERY_LONG: 'no'
+      ENABLE_CELERY_BEAT: 'no'
+    depends_on:
+      - db
+      - redis
+      - migrations
+    restart: always
+
+  migrations:
+    image: mediacms/mediacms:latest
+    command: python manage.py migrate --noinput
+    environment:
+      DB_HOST: db
+      DB_NAME: mediacms
+      DB_USER: mediacms
+      DB_PASSWORD: "change_me_please"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - db
+      - redis
+    restart: on-failure
+
+  db:
+    image: postgres:15.2-alpine
+    environment:
+      POSTGRES_USER: mediacms
+      POSTGRES_PASSWORD: "change_me_please"
+      POSTGRES_DB: mediacms
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+    restart: always
+
+  redis:
+    image: redis:alpine
+    restart: always

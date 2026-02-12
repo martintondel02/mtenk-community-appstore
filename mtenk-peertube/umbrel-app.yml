@@ -1,25 +1,23 @@
 manifestVersion: 1
 id: mtenk-peertube
+category: media
 name: PeerTube
-tagline: A free, decentralized and federated video platform
-icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR4-Rtz2wq7Fx4JdWSVaP4_jxAwPFxCoaM3Q&s
-category: Media
-version: "8.0.1"
-port: 9999
+version: "6.0.0"
+tagline: "ActivityPub-federated video streaming platform"
 description: >-
-  PeerTube is a free, decentralized and federated video platform developed by Framasoft, as an alternative to other platforms that centralize our data and attention, such as YouTube, Dailymotion or Vimeo.
+  PeerTube is a free and open-source, decentralized, federated video platform powered by ActivityPub.
 developer: Chocobozzz
-website: https://joinpeertube.org
-submitter: mtenk
-submission: https://github.com/martintondel02/mtenk-community-appstore
+website: https://joinpeertube.org/
+dependencies: []
 repo: https://github.com/Chocobozzz/PeerTube
 support: https://github.com/Chocobozzz/PeerTube/issues
-gallery:
-  - https://joinpeertube.org/img/features/interface-home.jpg
-  - https://joinpeertube.org/img/features/interface-discover.jpg
-releaseNotes: >-
-  Update to PeerTube v8.0.1
-dependencies: []
+port: 9001
 path: ""
 defaultUsername: "root"
-defaultPassword: "peertube"
+defaultPassword: "password"
+gallery:
+  - https://joinpeertube.org/img/features/interface.jpg
+releaseNotes: "Initial release for Umbrel"
+license: AGPL-3.0
+submitter: "Community"
+submission: "https://github.com/getumbrel/umbrel-community-app-store"

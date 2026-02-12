@@ -1,48 +1,40 @@
-version: "3.7"
+version: '3.3'
 
 services:
-  app_proxy:
-    environment:
-      APP_HOST: mtenk-peertube_peertube_1
-      APP_PORT: 9000
-    ports:
-      - "9999:80"
-
   peertube:
-    image: chocobozzz/peertube:production
+    image: chocobozzz/peertube:production-bullseye
     environment:
-      - POSTGRES_USER=peertube
-      - POSTGRES_PASSWORD=peertube
-      - POSTGRES_DB=peertube
       - PEERTUBE_DB_USERNAME=peertube
       - PEERTUBE_DB_PASSWORD=peertube
-      - PEERTUBE_DB_NAME=peertube
-      - PEERTUBE_DB_HOSTNAME=db
-      - PEERTUBE_WEBSERVER_HOSTNAME=192.168.1.45
-      - PEERTUBE_WEBSERVER_PORT=9999
-      - PEERTUBE_WEBSERVER_HTTPS=false
-      - PEERTUBE_ADMIN_EMAIL=admin@umbrel.local
-      - PEERTUBE_SECRET=6e3b5e4c5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c
-      - PT_INITIAL_ROOT_PASSWORD=peertube
+      - PEERTUBE_DB_HOSTNAME=postgres
+      - PEERTUBE_REDIS_HOSTNAME=redis
+      - PEERTUBE_WEBSERVER_HOSTNAME=umbrel.local
+      - PEERTUBE_WEBSERVER_PORT=9001
+      - PEERTUBE_TRUST_PROXY=["loopback", "linklocal", "uniquelocal"]
+      - PEERTUBE_ADMIN_EMAIL=admin@example.com
+      - PEERTUBE_SECRET=supersecretkeyChangeMe
+    ports:
+      - "9001:9000"
     volumes:
-      - ./data/peertube/assets:/app/client/dist/static
-      - ./data/peertube/data:/data
-      - ./data/peertube/config:/config
+      - ${APP_DATA_DIR}/data/peertube:/var/www/peertube/storage
+      - ${APP_DATA_DIR}/config/peertube:/var/www/peertube/config
     depends_on:
-      - db
+      - postgres
       - redis
     restart: on-failure
 
-  db:
+  postgres:
     image: postgres:13-alpine
     environment:
       - POSTGRES_USER=peertube
       - POSTGRES_PASSWORD=peertube
-      - POSTGRES_DB=peertube
+      - POSTGRES_DB=peertube_prod
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
     restart: on-failure
 
   redis:
     image: redis:6-alpine
+    volumes:
+      - ${APP_DATA_DIR}/data/redis:/data
     restart: on-failure

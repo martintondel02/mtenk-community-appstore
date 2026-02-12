@@ -1,0 +1,23 @@
+manifestVersion: 1
+id: mtenk-mediacms
+category: media
+name: MediaCMS
+version: "latest"
+tagline: "Modern, fully featured open source video CMS"
+description: >-
+  MediaCMS is a modern, fully featured open source video CMS. It is developed using Python / Django and React.
+developer: MediaCMS
+website: https://mediacms.io/
+dependencies: []
+repo: https://github.com/mediacms-io/mediacms
+support: https://github.com/mediacms-io/mediacms/issues
+port: 8001
+path: ""
+defaultUsername: "admin"
+defaultPassword: "password"
+gallery:
+  - https://raw.githubusercontent.com/mediacms-io/mediacms/master/docs/images/home.png
+releaseNotes: "Initial release for Umbrel"
+license: MIT
+submitter: "Community"
+submission: "https://github.com/getumbrel/umbrel-community-app-store"
