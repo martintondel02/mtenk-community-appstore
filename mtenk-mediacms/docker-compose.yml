@@ -4,7 +4,7 @@ services:
   web:
     image: mediacms/mediacms:latest
     ports:
-      - "88:80"
+      - "8001:80"
     volumes:
       - ${APP_DATA_DIR}/data/media_files:/home/mediacms.io/mediacms/media_files
       - ${APP_DATA_DIR}/data/logs:/home/mediacms.io/mediacms/logs
